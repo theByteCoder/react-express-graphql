@@ -1,6 +1,6 @@
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import Lists from './components/Lists'
+import Books from './components/Books'
 
 const client = new QueryClient()
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <QueryClientProvider client={client}>
       <div className="App">
-        <Lists />
+        <Books />
       </div>
     </QueryClientProvider>
   );

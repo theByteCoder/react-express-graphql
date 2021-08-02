@@ -19,10 +19,10 @@ const useStyles = makeStyles({
 const Lists = () => {
     const classes = useStyles();
 
-    const { isLoading, error, data: rows } = useQuery('@books', () => fetch('http://localhost:2000/graphql', {
+    const { isLoading, error, data: rows } = useQuery('@books/get', () => fetch('http://localhost:2000/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: '{ books { name genre id: _id } }' })
+        body: JSON.stringify({ query: '{ books { name genre id: _id author { name } } }' })
     }).then(res => res.json()).then(({ data: { books: results } }) => results)
     )
 
@@ -37,6 +37,7 @@ const Lists = () => {
                     <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Genre</TableCell>
+                        <TableCell align="right">Author</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -46,6 +47,7 @@ const Lists = () => {
                                 {row.name}
                             </TableCell>
                             <TableCell align="right">{row.genre}</TableCell>
+                            <TableCell align="right">{row.author.name}</TableCell>
                         </TableRow>
                     )) : <TableRow >
                         <TableCell component="th" scope="row">
